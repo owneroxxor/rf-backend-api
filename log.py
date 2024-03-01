@@ -1,6 +1,6 @@
 import sys
 import threading
-from logging import StreamHandler, Logger, getLogger
+from logging import Logger, StreamHandler, getLogger
 
 from json_log_formatter import VerboseJSONFormatter
 from useful.logs.exception_hooks import (

@@ -6,6 +6,9 @@
 # Virtual Environment
 .venv
 
+# RSA
+.rsa
+
 # Node artifact files
 node_modules/
 dist/

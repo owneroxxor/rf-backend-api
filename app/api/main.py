@@ -1,34 +1,34 @@
 import asyncio
-from fastapi import Depends, FastAPI
+
+from fastapi import FastAPI
 from starlette.responses import RedirectResponse
 
-from app.api.routers import health, login, b3
-from app.security import JWTBearer, fetch_public_sig_keys
-from app.log import get_logger
-from app.b3 import B3
+from app.api.routers import b3_router, login  # health,
+from b3 import B3_client
+from db import DB_client
+from log import get_logger
 
 log = get_logger("uvicorn.error")
 
 app = FastAPI()
 app.include_router(login.router)
-app.include_router(b3.router, dependencies=[Depends(JWTBearer())])
-app.include_router(health.router)
+app.include_router(b3_router.router)
+# app.include_router(health.router)
 
 
 @app.on_event("startup")
 async def startup():
     log.info("Starting up application ...")
-    if not fetch_public_sig_keys():
-        log.fatal("Failed to fetch public signature parameters from identity server")
-        return
-    asyncio.create_task(fc.start())
+    await B3_client.start()
+    await DB_client.start()
     log.info("Application successfully started")
 
 
 @app.on_event("shutdown")
 async def shutdown():
     log.info("Shutting down application ...")
-    await fc.stop()
+    await B3_client.stop()
+    await DB_client.stop()
     log.info("Applcation successfully stopped")
 
 

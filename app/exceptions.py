@@ -8,7 +8,7 @@ class UserNotFound(RFBaseException):
     pass
 
 
-class PasswordDontMatch(RFBaseException):
+class PasswordMismatch(RFBaseException):
     pass
 
 

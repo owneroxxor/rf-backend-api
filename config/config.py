@@ -1,11 +1,4 @@
-from datetime import datetime
-from itertools import permutations, product
-from pathlib import Path
-from urllib.parse import urlparse
-import os
-import yaml
-
-_ENV = os.environ.get("RF_ENV", "DEV")
+from envyaml import EnvYAML
 
 
 class AttrDict(dict):
@@ -32,8 +25,7 @@ class AttrDict(dict):
 class Config:
     def __init__(self, file_name, env):
         self.__env = env
-        with open(file_name) as fp:
-            self.__config = AttrDict(yaml.safe_load(fp))[self.__env]
+        self.__config = AttrDict(EnvYAML(file_name, strict=False).export())[self.__env]
 
     def __getattr__(self, attr):
         return self.__config.get(attr)
@@ -48,10 +40,3 @@ class Config:
 class AppConfig(Config):
     def __init__(self, file_name, env):
         super().__init__(file_name, env)
-
-    @property
-    def firebase_address(self) -> str:
-        return self.firebase_address
-
-
-cfg = AppConfig(Path(__file__).parent / "config.yml", _ENV)
