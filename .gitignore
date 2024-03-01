@@ -5,6 +5,7 @@
 
 # Virtual Environment
 .venv
+.vscode
 
 # RSA
 .rsa
@@ -54,3 +55,5 @@ Thumbs.db
 *.mov
 *.wmv
 
+# Etc
+.python-version
