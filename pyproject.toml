@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "rf-backend-api"
+version = "0.1.0"
+description = "Renda Facil Backend API"
+authors = ["Rodrigo Formighieri <rodrigo@hawkishcapital.com.br>"]
+
+[tool.poetry.dependencies]
+python = ">=3.9.5,<3.11"
+fastapi = "0.75.0"
+pandas = "1.4.1"
+JSON-log-formatter = "^0.5.1"
+velebit-useful-logs = "^1.0.2"
+PyJWT = "^2.3.0"
+aiofirebase = "^0.2.0"
+PyYAML = "^6.0"
+uvicorn = "^0.17.6"
+uvloop = "^0.16.0"
+python-multipart = "^0.0.5"
+certifi = "^2021.10.8"
+envyaml = "^1.10.211231"
+
+[tool.poetry.dev-dependencies]
+isort = "^5.10.1"
+black = "^22.1.0"
+mypy = "^0.941"
+pylama = "^8.3.8"
+ipython = "^8.2.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
